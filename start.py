@@ -13,7 +13,6 @@ from pdf_wrapper import PDFWrapper
 
 def get_api_key():
     secret_path = os.path.expanduser(local_secret_path)
-    print(secret_path)
     temp_api_key = None
     try:
         with open(secret_path, "r") as file:
