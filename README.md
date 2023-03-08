@@ -12,3 +12,6 @@ Be aware there may be cost from OpenAI.
 pip3 install -r requirements.txt
 python3 start.py
 ```
+
+# Demo
+![image](https://user-images.githubusercontent.com/10095870/223643424-bcaeff26-e7b4-4cef-b9e0-fccebb30861c.png)
