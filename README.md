@@ -1,7 +1,7 @@
 # PaperGPT
 PaperGPT is a tool that uses OpenAI's GPT-3.5-Turbo language model (same that powers ChatGPT) to answer questions about research papers. With PaperGPT, you can ask questions about a research paper and get relevant answers in natural language.
 
-# Installation
+## Installation
 To install PaperGPT, first clone the repository:
 ```
 git clone git@github.com:ruogudu/PaperGPT.git
@@ -12,7 +12,7 @@ Then, navigate to the papergpt directory and run:
 pip3 install -r requirements.txt
 ```
 
-# Usage
+## Usage
 
 To use PaperGPT, navigate to the PaperGPT directory and run:
 ```
@@ -27,7 +27,7 @@ If this is your first time using PaperGPT with this research paper, it will take
 
 To ask a question, simply type it in at the > prompt and press Enter. PaperGPT will query the language model and return the most relevant answer.
 
-# Demo
+## Demo
 Here's an example of how to use PaperGPT:
 
 ![image](https://user-images.githubusercontent.com/10095870/223643424-bcaeff26-e7b4-4cef-b9e0-fccebb30861c.png)
