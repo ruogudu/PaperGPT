@@ -1,6 +1,7 @@
 import pickle
 import re
 
+from alive_progress import alive_bar
 import math
 
 from chatgpt_wrapper import ChatGPTWrapper
@@ -24,8 +25,7 @@ class CuratedPaper:
         self.per_page_limit = math.floor(
             self.MAX_SUMMARY_TOKEN_COUNT / pdf_wrapper.get_num_pages()
         )
-        self.summary_all = None
-        self.get_summary_all()
+        self.summary_all = self.curate_summary_all()
 
     def get_summary_for_page(self, page_num: int):
         if page_num in self.page_summary_map:
@@ -38,22 +38,23 @@ class CuratedPaper:
         )
         return answer
 
-    def get_summary_all(self):
-        if self.summary_all is not None:
-            return self.summary_all
+    def curate_summary_all(self):
         num_pages = self.pdf_wrapper.get_num_pages()
         summaries = []
-        for p in range(num_pages):
-            summary = self.get_summary_for_page(p)
-            summary_with_page = f"Page {p}: {summary}"
-            summaries.append(summary_with_page)
-            print(f"Page {p+1} curated.")
-        self.summary_all = "\n\n".join(summaries)
-        return self.summary_all
+
+        with alive_bar(num_pages, length=40, spinner='dots_waves') as bar:
+            for p in range(num_pages):
+                summary = self.get_summary_for_page(p)
+                summary_with_page = f"Page {p}: {summary}"
+                summaries.append(summary_with_page)
+                bar()
+
+        summary_all = "\n\n".join(summaries)
+        return summary_all
 
     def get_best_page_for_answer(self, question: str):
         prompt = self.TEMPLATE_QUESTION_GET_PAGE.format(
-            question=question, all_summaries=self.get_summary_all()
+            question=question, all_summaries=self.summary_all
         )
         answer = ChatGPTWrapper.ask(prompt=prompt, max_tokens=10)
         page_num = re.search(r"\d+", answer)
@@ -73,7 +74,7 @@ class CuratedPaper:
 
     def get_answer_from_summary(self, question: str):
         prompt = self.TEMPLATE_ANSWER_WITH_SUMMARY.format(
-            question=question, all_summaries=self.get_summary_all()
+            question=question, all_summaries=self.summary_all
         )
         answer = ChatGPTWrapper.ask(prompt=prompt)
         return answer
@@ -87,7 +88,7 @@ class CuratedPaper:
         return answer
 
     def get_intro(self):
-        prompt = self.TEMPLATE_INTRO.format(all_summaries=self.get_summary_all())
+        prompt = self.TEMPLATE_INTRO.format(all_summaries=self.summary_all)
         answer = ChatGPTWrapper.ask(prompt=prompt)
         return answer
 
