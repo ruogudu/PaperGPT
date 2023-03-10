@@ -11,10 +11,10 @@ from config import VERSION
 
 class CuratedPaper:
     TEMPLATE_SUMMARY = "Please summarize this section of a research paper. Be focused on the information a researcher may find interesting. Include the authors of the paper if you find them. The content you need to summarize is as below. {content}"
-    TEMPLATE_INTRO = "Here are the summarizes of each page from a research paper. Please give yourself a proper name given the context of this paper, greet me as this paper, and introduce yourself to me. After the summary, please also provide three questions a researcher may want to ask you like this 'You may want to ask me these questions...'. You don't need to include the original summaries in the response. The summaries are. {all_summaries}"
-    TEMPLATE_QUESTION_GET_PAGE = 'You are a research paper. Here is a message to you and the summarizes of each page from the research paper. Please tell me which page may best respond to the message. Please only respond the page number in digits without further explanation. If you are not sure, respond "None". The message is. "{question}" The summaries of each page are. {all_summaries}'
-    TEMPLATE_ANSWER_WITH_PAGE = 'You are a research paper. Please succinctly respond to this message with this section of the research paper. The message is. "{question}" The section of the research paper is. {content}'
-    TEMPLATE_ANSWER_WITH_SUMMARY = 'You are a research paper. Please succinctly respond to this message to you. The message is. "{question}" The research paper is. {all_summaries}'
+    TEMPLATE_INTRO = "Here are the summarizes of each page from a research paper. Please give yourself a proper name given the context of this paper, greet me as this paper, and introduce yourself to me with a summary of the content. Please also provide three questions a researcher may want to ask you like this 'You may want to ask me these questions...<bullet points>'. You don't need to include the original summaries in the response. The summaries are. {all_summaries}"
+    TEMPLATE_QUESTION_GET_PAGE = 'Answer the question based on the context below. Keep the answer short and concise. Respond "Unsure about answer" if not sure about the answer. Context: "{all_summaries}" Question: Which page may best answer the question? Please just give me the page number in digits. The question is: {question}'
+    TEMPLATE_ANSWER_WITH_PAGE = 'Answer the question as if you are a research paper based on the context below. Keep the answer short and concise. Respond "Unsure about answer" if not sure about the answer. Context: "{content}" Question: {question}'
+    TEMPLATE_ANSWER_WITH_SUMMARY = 'Answer the question as if you are a research paper based on the context below. Context: "{all_summaries}" Question: {question}'
 
     MAX_SUMMARY_TOKEN_COUNT = 4000
 
