@@ -42,10 +42,10 @@ class CuratedPaper:
         num_pages = self.pdf_wrapper.get_num_pages()
         summaries = []
 
-        with alive_bar(num_pages, length=40, spinner='dots_waves') as bar:
+        with alive_bar(num_pages, length=40, spinner="dots_waves") as bar:
             for p in range(num_pages):
                 summary = self.get_summary_for_page(p)
-                summary_with_page = f"Page {p}: {summary}"
+                summary_with_page = f"Page {p+1}: {summary}"
                 summaries.append(summary_with_page)
                 bar()
 
@@ -63,13 +63,13 @@ class CuratedPaper:
         return int(page_num.group())
 
     def get_answer_from_page(self, question: str, page_num: int):
-        page_text = self.pdf_wrapper.get_page(page_num)
+        page_text = self.pdf_wrapper.get_page(page_num - 1)
         prompt = self.TEMPLATE_ANSWER_WITH_PAGE.format(
             question=question,
             content=page_text,
         )
         answer = ChatGPTWrapper.ask(prompt=prompt)
-        answer += f" (Page {page_num+1})"
+        answer += f" (Page {page_num})"
         return answer
 
     def get_answer_from_summary(self, question: str):
