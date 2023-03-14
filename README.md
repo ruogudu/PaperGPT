@@ -21,7 +21,7 @@ python3 start.py
 
 This will prompt you to enter your OpenAI API key. If you don't have an API key, you can sign up for one on the [OpenAI website](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key).
 
-Next, you will be prompted to enter the URL of the research paper you want to query. PaperGPT only works with PDFs, so make sure the URL points to a PDF file.
+Next, you will be prompted to enter the URL of the research paper you want to query or the path to a local PDF file. PaperGPT works with PDFs only, so make sure the URL points to a PDF file or the local file is a PDF.
 
 If this is your first time using PaperGPT with this research paper, it will take several minutes to "curate" the paper. This process involves extracting key information from the paper and preparing it for input to the language model. Once the curation process is complete, you can begin asking questions about the paper.
 
