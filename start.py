@@ -45,10 +45,12 @@ def get_api_key():
 def get_paper_url():
     while True:
         paper_url = questionary.text(
-            "What is the URL of the research paper (PDF)?"
+            "What is the URL of the research paper (PDF)? (Enter 'exit' to exit)"
         ).ask()
 
         try:
+            if paper_url.strip().lower() == "exit":
+                exit()
             result = urllib.parse.urlparse(paper_url)
             if all([result.scheme, result.netloc]):
                 try:
